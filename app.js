@@ -54,6 +54,7 @@ app.use((req, res, next) => {
   const theme = req.signedCookies.theme || "light";
 
   res.locals.theme = theme;
+  res.locals.isDarkMode = theme === "dark";
   res.locals.currentUser = req.session.user || null;
   next();
 });
@@ -101,7 +102,10 @@ app.get("/toggle-theme", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { pageTitle: "Login Page" });
+  const errorMessage =
+    req.query.error === "invalid" ? "Invalid username or password" : null;
+
+  res.render("login", { pageTitle: "Login Page", errorMessage });
 });
 
 app.post("/login", (req, res) => {
@@ -112,13 +116,31 @@ app.post("/login", (req, res) => {
     req.session.user = {
       username: user.username,
       fullName: user.fullName,
+      email: user.email,
+      bio: user.bio,
     };
-    res.redirect("/profile");
-  } else {
-    res.status(401).json({
-      error: "Invalid username or password. Please try again.",
+    // some reason redirect doesn't work properly so use render instead
+    // res.redirect("/profile");
+    res.render("profile", {
+      pageTitle: "Profile Page",
+      user: req.session.user,
     });
+  } else {
+    res.redirect("/login?error=invalid");
   }
+});
+
+app.get("/profile", authenticate, (req, res) => {
+  const user = {
+    username: req.session.user.username,
+    fullName: req.session.user.fullName,
+    email: req.session.user.email,
+    bio: req.session.user.bio,
+  };
+  res.render("profile", {
+    pageTitle: "Profile Page",
+    user,
+  });
 });
 
 app.get("/logout", (req, res) => {
@@ -128,18 +150,6 @@ app.get("/logout", (req, res) => {
     }
     res.clearCookie("connect.sid");
     res.redirect("/");
-  });
-});
-
-app.get("/profile", authenticate, (req, res) => {
-  const user = users[req.session.user.username];
-  res.render("profile", {
-    pageTitle: "Profile Page",
-    user: {
-      fullName: user.fullName,
-      email: user.email,
-      bio: user.bio,
-    },
   });
 });
 

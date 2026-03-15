@@ -1,0 +1,73 @@
+<div class="w-full mx-auto px-6 mt-12">
+  <div class="mb-8 text-left">
+    <h1
+      class="font-serif text-4xl font-bold mb-2 text-[color:var(--text)]"
+    >Profile Page</h1>
+    <p class="text-[color:var(--muted)] italic text-lg">Welcome,
+      {{user.fullName}}! 👋</p>
+  </div>
+
+  <div class="flex flex-row gap-8">
+    <div class="w-full">
+      <div
+        class="bg-[color:var(--surface)] p-6 rounded-xl shadow-sm border border-[color:var(--surface-border)] mb-6"
+      >
+        <h2 class="font-serif text-xl font-bold mb-6 flex items-center gap-2">
+          <span>📋</span>
+          Personal Information
+        </h2>
+
+        <div class="space-y-4">
+          <div class="flex border-b border-[color:var(--surface-border)] pb-3">
+            <span class="w-40 text-[color:var(--muted)]">Full Name</span>
+            <span
+              class="font-medium text-[color:var(--text)]"
+            >{{user.fullName}}</span>
+          </div>
+
+          <div class="flex border-b border-[color:var(--surface-border)] pb-3">
+            <span class="w-40 text-[color:var(--muted)]">Email Address</span>
+            <span
+              class="font-medium text-[color:var(--text)]"
+            >{{user.email}}</span>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="text-[color:var(--muted)] mb-2">Short Bio</span>
+            <div
+              class="p-4 bg-[color:var(--bg)] rounded-lg italic text-[color:var(--text)] leading-relaxed"
+            >
+              "{{user.bio}}"
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <a
+          href="/"
+          class="px-6 py-3 border border-[color:var(--surface-border)] rounded-lg font-medium hover:bg-[color:var(--surface)] transition no-underline text-[color:var(--text)] inline-block"
+        >
+          ← Go Back to Homepage
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="bg-[color:var(--surface)] p-6 rounded-xl shadow-sm border border-[color:var(--surface-border)]"
+    >
+      <div class="relative mb-4">
+        <img
+          src="/img/profile.jpg"
+          alt="Profile Picture"
+          class="w-full aspect-square object-cover rounded-lg"
+        />
+        <div
+          class="absolute top-2 right-2 bg-[color:var(--accent)] text-white px-3 py-1 rounded-full text-sm"
+        >
+          <span>{{user.fullName}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

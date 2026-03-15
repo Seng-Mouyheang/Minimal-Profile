@@ -1,0 +1,86 @@
+<header
+  class="sticky top-0 z-50 flex items-center justify-between border-b border-[color:var(--surface-border)] bg-[color:var(--bg)] px-6 py-4 font-serif backdrop-blur-md"
+>
+
+  <a
+    href="/"
+    class="ml-12 text-2xl font-bold text-[color:var(--text)] transition-colors duration-200 hover:text-[color:var(--accent)]"
+  >
+    SMHeang
+  </a>
+
+  <nav class="mr-12 flex items-center gap-8 tracking-widest uppercase">
+    <ul class="flex items-center gap-8">
+      <li>
+        <a
+          href="/"
+          class="text-[color:var(--text)] transition-colors duration-200 hover:text-[color:var(--accent)]"
+        >Home</a>
+      </li>
+      <li>
+        <a
+          href="/profile"
+          class="text-[color:var(--text)] transition-colors duration-200 hover:text-[color:var(--accent)]"
+        >Profile</a>
+      </li>
+      {{#if currentUser}}
+        <li>
+          <a
+            href="/logout"
+            class="text-[color:var(--text)] transition-colors duration-200 hover:text-[color:var(--accent)]"
+          >Logout</a>
+        </li>
+      {{else}}
+        <li>
+          <a
+            href="/login"
+            class="text-[color:var(--text)] transition-colors duration-200 hover:text-[color:var(--accent)]"
+          >Login</a>
+        </li>
+      {{/if}}
+    </ul>
+
+    <button
+      aria-label="Toggle Theme"
+      class="text-[color:var(--text)] transition-colors duration-200 hover:text-[color:var(--accent)]"
+    >
+      <a href="/toggle-theme">
+        {{#if isDarkMode}}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-moon"
+          ><path
+              d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+            /></svg>
+        {{else}}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-sun"
+          ><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path
+              d="M12 20v2"
+            /><path d="m4.93 4.93 1.41 1.41" /><path
+              d="m17.66 17.66 1.41 1.41"
+            /><path d="M2 12h2" /><path d="M20 12h2" /><path
+              d="m6.34 17.66-1.41 1.41"
+            /><path d="m19.07 4.93-1.41 1.41" /></svg>
+        {{/if}}
+      </a>
+    </button>
+  </nav>
+</header>
